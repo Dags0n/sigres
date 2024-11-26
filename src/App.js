@@ -1,6 +1,7 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
+import Login from './pages/login/Login';
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: '/settings',
     element: <Navbar ><h1>Configurações</h1></Navbar>,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
   {
     path: '*',
