@@ -1,34 +1,34 @@
 import * as React from 'react';
-import { 
-    styled, 
+import {
+  styled,
 } from '@mui/material/styles';
-import { 
-    Box, 
-    Drawer as MuiDrawer, 
-    AppBar as MuiAppBar, 
-    Toolbar, 
-    List, 
-    Typography, 
-    IconButton, 
-    ListItemButton, 
-    ListItemIcon, 
-    ListItemText, 
-    Avatar
+import {
+  Box,
+  Drawer as MuiDrawer,
+  AppBar as MuiAppBar,
+  Toolbar,
+  List,
+  Typography,
+  IconButton,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Avatar
 } from '@mui/material';
-import { 
-    Menu as MenuIcon, 
+import {
+  Menu as MenuIcon,
 } from '@mui/icons-material';
 
 import LogoSigres from '../../assets/logo-sigres.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
-import { 
-  faAnglesLeft, 
-  faBasketShopping, 
-  faGear, 
-  faHouseChimney, 
-  faListCheck, 
+import {
+  faAnglesLeft,
+  faBasketShopping,
+  faGear,
+  faHouseChimney,
+  faListCheck,
   faStore,
   faUsers,
   faUsersGear,
@@ -79,6 +79,11 @@ const pages = [
     url: '/settings',
     icon: faGear,
   },
+  {
+    title: 'Chat',
+    url: '/chat',
+    icon: faFacebookMessenger,
+  },
 ];
 
 const openedMixin = (theme) => ({
@@ -121,13 +126,13 @@ const StyledImg = styled('img')(({ open }) => ({
 }));
 
 const StyledTypography = styled(Typography)(({ open }) => ({
-  px: 2, 
-  display: open ? 'flex' : 'none', 
-  flexDirection: 'column', 
-  textAlign: 'center', 
-  fontFamily: '"Press Start 2P", sans-serif', 
-  fontSize: 14, 
-  marginTop: '-35px', 
+  px: 2,
+  display: open ? 'flex' : 'none',
+  flexDirection: 'column',
+  textAlign: 'center',
+  fontFamily: '"Press Start 2P", sans-serif',
+  fontSize: 14,
+  marginTop: '-35px',
   color: 'white',
 }));
 
@@ -181,7 +186,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 export default function MiniDrawer(content) {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   content = content.children;
 
   const handleDrawerOpen = () => {
@@ -201,23 +206,36 @@ export default function MiniDrawer(content) {
             aria-label="open drawer"
             onClick={handleDrawerOpen}
             edge="start"
-            sx={[ { marginRight: 5 }, open && { display: 'none' } ]}
+            sx={[{ marginRight: 5 }, open && { display: 'none' }]}
           >
             <MenuIcon />
           </IconButton>
-          <Typography 
-            variant="h6" 
-            noWrap 
-            component="div" 
-            flexGrow={1} 
-            fontWeight={900} 
-            fontSize={24} 
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            flexGrow={1}
+            fontWeight={900}
+            fontSize={24}
             fontFamily="Poppins"
           >
             {pages.find(page => window.location.pathname === page.url).title}
           </Typography>
-          <FontAwesomeIcon icon={faFacebookMessenger} style={{ height: 25  }}/>
-          <Avatar alt="User" src="" sx={{ width: 40, height: 40, marginLeft: 2 }} />
+          <NavLink
+            key='Chat'
+            to='/chat'
+            disablePadding
+          >
+              <FontAwesomeIcon icon={faFacebookMessenger} color="white" style={{ height: 25 }} />
+              <span style={{ fontSize: 'smaller', color: 'red', verticalAlign: '-2px' }}>2</span>
+          </NavLink>
+          <NavLink
+            key='Configurações'
+            to='/settings'
+            disablePadding
+          >
+            <Avatar alt="User" src="" sx={{ width: 40, height: 40, marginLeft: 2 }} />
+          </NavLink>
         </Toolbar>
       </AppBar>
       <Drawer variant="permanent" open={open}>
@@ -229,21 +247,21 @@ export default function MiniDrawer(content) {
         <StyledTypography variant="h6" open={open}>
           SIG<span>RES</span>
         </StyledTypography>
-        <StyledImg src={LogoSigres} alt="Logo Sigres" open={open}/>
+        <StyledImg src={LogoSigres} alt="Logo Sigres" open={open} />
         <List>
-          {pages.map((page) => (
-            <NavLink 
-              key={page.title} 
-              to={page.url} 
-              disablePadding 
+          {pages.filter((page) => (page.title !== "Chat")).map((page) => (
+            <NavLink
+              key={page.title}
+              to={page.url}
+              disablePadding
               style={({ isActive }) => ({
                 borderLeft: isActive ? '5px solid #7E73FF' : '',
-                display: 'block', 
+                display: 'block',
                 textDecoration: 'none'
               })}
             >
               <ListItemButton
-                sx={{ minHeight: 48, px: 2.5 , justifyContent: open ? '' : 'center' }}
+                sx={{ minHeight: 48, px: 2.5, justifyContent: open ? '' : 'center' }}
               >
                 <ListItemIcon
                   sx={{ minWidth: 0, justifyContent: 'center', mr: open ? 3 : 'auto' }}
@@ -252,7 +270,7 @@ export default function MiniDrawer(content) {
                 </ListItemIcon>
                 <ListItemText
                   primary={page.title}
-                  sx={{ opacity : open ? 1 : 0, color : 'white' }}
+                  sx={{ opacity: open ? 1 : 0, color: 'white' }}
                 />
               </ListItemButton>
             </NavLink>

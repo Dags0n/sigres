@@ -1,11 +1,17 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
+import Home from './pages/Home';
+import Users from './pages/Users';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navbar ><h1>Home</h1></Navbar>,
+    element: (
+      <Navbar>
+        <Home />
+      </Navbar>
+    ),
   },
   {
     path: '/products',
@@ -29,11 +35,18 @@ const router = createBrowserRouter([
   },
   {
     path: '/users',
-    element: <Navbar ><h1>Usuários</h1></Navbar>,
+    element:
+      <Navbar>
+        <Users />
+      </Navbar>,
   },
   {
     path: '/settings',
     element: <Navbar ><h1>Configurações</h1></Navbar>,
+  },
+  {
+    path: '/chat',
+    element: <Navbar ><h1>Chat</h1></Navbar>,
   },
   {
     path: '*',
