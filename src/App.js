@@ -17,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/reports',
-    element: <Navbar ><h1>RelaTórios</h1></Navbar>,
+    element: <Navbar ><h1>Relatórios</h1></Navbar>,
   },
   {
     path: '/stock',
