@@ -26,7 +26,7 @@ ChartJS.register(
 export default function LineChart({ xAxis, yAxis, data, yPadding = 10 }) {
     // Calcula o maior valor do dataset e adiciona o padding
     const biggestValue = Math.max(...data);
-    const maxYValue = biggestValue + (biggestValue * 10)/100;
+    const maxYValue = biggestValue + (biggestValue * 10) / 100;
 
     const chartData = {
         labels: xAxis, // Valores do eixo X
@@ -51,7 +51,7 @@ export default function LineChart({ xAxis, yAxis, data, yPadding = 10 }) {
             },
             title: {
                 display: true,
-                text: 'Vendas Realizadas',
+                text: 'Vendas Realizadas na última semana',
             },
         },
         scales: {
@@ -63,7 +63,7 @@ export default function LineChart({ xAxis, yAxis, data, yPadding = 10 }) {
     };
 
     return (
-        <div class="line-box" style={{ width: '400px', height: '300px', marginLeft: '20px' }}>
+        <div class="line-box" style={{ width: '80%', height: '300px' }}>
             <Line data={chartData} options={options} />
         </div>
     );

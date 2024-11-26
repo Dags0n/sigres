@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
-import Home from './pages/Home';
-import Users from './pages/Users';
+import Home from './pages/home/Home';
+import Users from './pages/users/Users';
 import Login from './pages/login/Login';
 
 const router = createBrowserRouter([

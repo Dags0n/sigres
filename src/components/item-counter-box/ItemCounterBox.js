@@ -9,7 +9,7 @@ const ItemCounterBox = ({ items }) => {
         {items.map((item, index) => (
           <div key={index}>
             <div className="item-box">
-                <p>{item.count}</p>
+              <p>{item.count}</p>
             </div>
             <h3>{item.name}</h3>
           </div>

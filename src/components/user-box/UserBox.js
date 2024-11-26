@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Avatar} from '@mui/material';
+import { Avatar } from '@mui/material';
 import './UserBox.css'; // CSS opcional
 
 const UserBox = ({ users }) => {

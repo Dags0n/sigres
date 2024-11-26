@@ -1,5 +1,6 @@
 import React from 'react';
-import UserBox from '../components/user-box/UserBox';
+import UserBox from '../../components/user-box/UserBox';
+import { Typography } from '@mui/material';
 
 // Dados para o ItemCounterBox
 const users = [
@@ -37,7 +38,10 @@ const users = [
 export default function Home() {
   return (
     <>
-      <div style={{ display: 'flex', justifyContent: 'start', flexWrap: 'wrap', marginTop: '20px'}}>
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexWrap: 'wrap' }}>
+        <Typography variant="h4" sx={{ fontFamily: 'Poppins', fontWeight: 900, m: "0 0 10px 0", justifySelf: 'flex-start' }}>
+          Usuários
+        </Typography>
         <UserBox users={users} />
       </div>
     </>
