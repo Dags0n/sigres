@@ -3,6 +3,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Home from './pages/Home';
 import Users from './pages/Users';
+import Login from './pages/login/Login';
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
   {
     path: '/chat',
     element: <Navbar ><h1>Chat</h1></Navbar>,
+  },
+  {
+    path: '/login',
+    element: <Login />,
   },
   {
     path: '*',
