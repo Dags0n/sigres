@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Tables.css'; // Arquivo CSS para estilização
+import { Typography } from '@mui/material';
 
 const Tables = () => {
     const [filter, setFilter] = useState('all'); // Estado para o filtro de mesas
@@ -33,7 +34,9 @@ const Tables = () => {
     return (
         <div className="table-list-container">
             <header className="table-list-header">
-                <h1>Mesas</h1>
+                <Typography variant="h4" sx={{ fontFamily: 'Poppins', fontWeight: 900, m: "0 0 10px 0", justifySelf: 'flex-start' }}>
+                    Mesas
+                </Typography>
                 <div className="filter-buttons">
                     <button
                         className={`filter-button ${filter === 'all' ? 'active' : ''}`}
