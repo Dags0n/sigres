@@ -20,6 +20,7 @@ import {
 } from '@mui/icons-material';
 
 import LogoSigres from '../../assets/logo-sigres.png';
+import CaraTranquilo from '../../assets/cara-tranquilo.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
@@ -246,7 +247,7 @@ export default function MiniDrawer(content) {
             to='/settings'
             disablePadding
           >
-            <Avatar alt="User" src="" sx={{ width: 40, height: 40, marginLeft: 2 }} />
+            <Avatar alt="User" src={CaraTranquilo} sx={{ width: 55, height: 55, marginLeft: 2 }} />
           </NavLink>
         </Toolbar>
       </AppBar>
