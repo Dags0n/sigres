@@ -11,6 +11,7 @@ import AddProduct from './pages/products/AddProduct';
 import InfoProduct from './pages/products/InfoProduct';
 import Tables from './pages/tables/Tables';
 import Orders from './pages/orders/Orders';
+import Settings from './pages/settings/Settings';
 
 const router = createBrowserRouter([
   {
@@ -86,7 +87,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/settings',
-    element: <Navbar ><h1>Configurações</h1></Navbar>,
+    element: 
+    <Navbar >
+      <Settings />
+    </Navbar>,
   },
   {
     path: '/chat',
