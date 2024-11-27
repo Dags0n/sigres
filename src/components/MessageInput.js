@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './MessageInput.css'
 
 const MessageInput = ({ onSendMessage }) => {
   const [message, setMessage] = useState("");
@@ -6,7 +7,7 @@ const MessageInput = ({ onSendMessage }) => {
   const handleChange = (event) => {
     setMessage(event.target.value);
   };
-
+  
   const handleSend = () => {
     if (message.trim() !== "") {
       onSendMessage(message);  // Envia a mensagem para o componente pai
