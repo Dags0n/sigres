@@ -20,14 +20,14 @@ const data = [100, 20, 150, 25, 300, 35, 20];
 export default function Home() {
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', flexWrap: 'wrap', marginTop: '20px' }}>
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'start', flexWrap: 'wrap', marginTop: '20px' }}>
+        <div style={{ width: '100%', display: 'flex', alignItems: 'start', justifyContent: 'start', flexDirection: 'column' }}>
           <Typography variant="h4" sx={{ fontFamily: 'Poppins', fontWeight: 900, m: "0 0 10px 0", justifySelf: 'flex-start' }}>
             Dashboard
           </Typography>
           <ItemCounterBox items={items} />
         </div>
-        <div style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column' }}>
+        <div style={{ width: '100%', display: 'flex', alignItems: 'start', justifyContent: 'start', flexDirection: 'column' }}>
           <Typography variant="h4" sx={{ fontFamily: 'Poppins', fontWeight: 900, m: "35px 0 10px 0" }}>
             Rendimentos
           </Typography>

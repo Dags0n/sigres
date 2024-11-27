@@ -3,7 +3,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
 import Users from './pages/users/Users';
+import AddUser from './pages/users/AddUser';
 import Login from './pages/login/Login';
+import InfoUser from './pages/users/InfoUser';
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,20 @@ const router = createBrowserRouter([
     element:
       <Navbar>
         <Users />
+      </Navbar>,
+  },
+  {
+    path: '/users/add',
+    element:
+      <Navbar>
+        <AddUser />
+      </Navbar>,
+  },
+  {
+    path: '/users/info',
+    element:
+      <Navbar>
+        <InfoUser />
       </Navbar>,
   },
   {

@@ -38,6 +38,8 @@ import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 200;
 
+const hiddenPages = ['Chat', 'Adicionar Usuário', 'Usuário'];
+
 const pages = [
   {
     title: 'Início',
@@ -72,6 +74,16 @@ const pages = [
   {
     title: 'Usuários',
     url: '/users',
+    icon: faUsersGear,
+  },
+  {
+    title: 'Adicionar Usuário',
+    url: '/users/add',
+    icon: faUsersGear,
+  },
+  {
+    title: 'Usuário',
+    url: '/users/info',
     icon: faUsersGear,
   },
   {
@@ -249,7 +261,7 @@ export default function MiniDrawer(content) {
         </StyledTypography>
         <StyledImg src={LogoSigres} alt="Logo Sigres" open={open} />
         <List>
-          {pages.filter((page) => (page.title !== "Chat")).map((page) => (
+          {pages.filter((page) => (!hiddenPages.includes(page.title))).map((page) => (
             <NavLink
               key={page.title}
               to={page.url}
