@@ -1,8 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './AddUser.css'; // Arquivo CSS para estilização
 import { NavLink } from 'react-router-dom';
 
 const AddUser = () => {
+    const [showNotification, setShowNotification] = useState(false);
+
+    const handleConfirm = (e) => {
+        e.preventDefault();
+        setShowNotification(true);
+
+        document.getElementById("name").value = "";
+        document.getElementById("password").value = "";
+        document.getElementById("checkbox").checked = false;
+
+        document.getElementById("confirm-button").style.backgroundColor = "#106212";
+        
+        // Ocultar a notificação automaticamente após 3 segundos
+        setTimeout(() => {
+            setShowNotification(false);
+        }, 3000);
+        setTimeout(() => {
+            document.getElementById("confirm-button").style.backgroundColor = "#4caf50";
+        }, 1000);
+    };
+
     return (
         <div className="cadastro-usuario-container">
             <main className="main-content">
@@ -10,15 +31,15 @@ const AddUser = () => {
                     <form className="form-cadastro-usuario">
                         <div className="form-group">
                             <label>Nome do Usuário</label>
-                            <input type="text" placeholder="Digite o nome do usuário" />
+                            <input id="name" type="text" placeholder="Digite o nome do usuário" />
                         </div>
                         <div className="form-group">
                             <label>Senha</label>
-                            <input type="password" placeholder="Digite a senha" />
+                            <input id="password" type="password" placeholder="Digite a senha" />
                         </div>
                         <div className="form-group">
                             <label>Administrador</label>
-                            <input type="checkbox" />
+                            <input id="checkbox" type="checkbox" />
                         </div>
                         <div className="form-group avatar-section">
                             <img
@@ -40,17 +61,18 @@ const AddUser = () => {
                                     Cancelar
                                 </button>
                             </NavLink>
-                            <NavLink
-                                key='Usuários'
-                                to='/users'
-                                disablePadding
-                            >
-                                <button type="submit" className="confirm-button">
-                                    Confirmar
-                                </button>
-                            </NavLink>
+                            <button id="confirm-button" type="submit" className="confirm-button" onClick={handleConfirm}>
+                                Confirmar
+                            </button>
                         </div>
                     </form>
+
+                    {/* Notificação */}
+                    {showNotification && (
+                        <div className="notification">
+                            Usuário cadastrado com sucesso! 🎉
+                        </div>
+                    )}
                 </section>
             </main>
         </div>
