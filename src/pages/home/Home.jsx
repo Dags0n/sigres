@@ -20,7 +20,7 @@ const data = [100, 20, 150, 25, 300, 35, 20];
 export default function Home() {
   return (
     <>
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'start', flexWrap: 'wrap', marginTop: '20px' }}>
+      <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'start', flexWrap: 'wrap' }}>
         <div style={{ width: '100%', display: 'flex', alignItems: 'start', justifyContent: 'start', flexDirection: 'column' }}>
           <Typography variant="h4" sx={{ fontFamily: 'Poppins', fontWeight: 900, m: "0 0 10px 0", justifySelf: 'flex-start' }}>
             Dashboard
