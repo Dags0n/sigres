@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './AddProduct.css'; // Arquivo CSS para estilização
 import { NavLink } from 'react-router-dom';
 
