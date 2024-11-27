@@ -10,6 +10,7 @@ import Products from './pages/products/Products';
 import AddProduct from './pages/products/AddProduct';
 import InfoProduct from './pages/products/InfoProduct';
 import Tables from './pages/tables/Tables';
+import Orders from './pages/orders/Orders';
 
 const router = createBrowserRouter([
   {
@@ -58,7 +59,9 @@ const router = createBrowserRouter([
   },
   {
     path: '/orders',
-    element: <Navbar ><h1>Pedidos</h1></Navbar>,
+    element: <Navbar >
+      <Orders />
+    </Navbar>,
   },
   {
     path: '/users',
