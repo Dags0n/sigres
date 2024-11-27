@@ -14,6 +14,7 @@ import Orders from './pages/orders/Orders';
 import Settings from './pages/settings/Settings';
 import Reports from './pages/reports/Reports';
 import Stock from './pages/stock/Stock';
+import Chat from './pages/chat/Chat';
 
 const router = createBrowserRouter([
   {
@@ -103,7 +104,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/chat',
-    element: <Navbar ><h1>Chat</h1></Navbar>,
+    element: <Navbar><Chat /></Navbar>,
   },
   {
     path: '/login',
@@ -112,7 +113,7 @@ const router = createBrowserRouter([
   {
     path: '*',
     element: <div>Not Found</div>,
-  }
+  },
 ]);
 
 function App() {
