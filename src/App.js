@@ -9,6 +9,7 @@ import InfoUser from './pages/users/InfoUser';
 import Products from './pages/products/Products';
 import AddProduct from './pages/products/AddProduct';
 import InfoProduct from './pages/products/InfoProduct';
+import Tables from './pages/tables/Tables';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/tables',
-    element: <Navbar ><h1>Mesas</h1></Navbar>,
+    element: 
+    <Navbar >
+      <Tables />
+    </Navbar>,
   },
   {
     path: '/reports',
