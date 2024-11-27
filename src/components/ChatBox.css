@@ -1,0 +1,62 @@
+.chatbox {
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-image: linear-gradient(to bottom right, #f9f9f9, #eaeaea);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  max-width: 80%;
+}
+
+.message.user {
+  background-color: #d0f0c0;
+  align-self: flex-end;
+}
+
+.message.admin {
+  background-color: #f0f0f0;
+  align-self: flex-start;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+
+.username {
+  font-weight: bold;
+  color: #333;
+}
+
+.message-time {
+  color: #888;
+}
+
+.message:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.chatbox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chatbox::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 10px;
+}
