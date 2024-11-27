@@ -20,6 +20,7 @@ import {
 } from '@mui/icons-material';
 
 import LogoSigres from '../../assets/logo-sigres.png';
+import CaraTranquilo from '../../assets/cara-tranquilo.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
@@ -38,6 +39,8 @@ import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 200;
 
+const hiddenPages = ['Chat', 'Adicionar Usuário', 'Usuário', 'Adicionar Produto', 'Produto'];
+
 const pages = [
   {
     title: 'Início',
@@ -47,6 +50,16 @@ const pages = [
   {
     title: 'Produtos',
     url: '/products',
+    icon: faBasketShopping,
+  },
+  {
+    title: 'Adicionar Produto',
+    url: '/products/add',
+    icon: faBasketShopping,
+  },
+  {
+    title: 'Produto',
+    url: '/products/info',
     icon: faBasketShopping,
   },
   {
@@ -72,6 +85,16 @@ const pages = [
   {
     title: 'Usuários',
     url: '/users',
+    icon: faUsersGear,
+  },
+  {
+    title: 'Adicionar Usuário',
+    url: '/users/add',
+    icon: faUsersGear,
+  },
+  {
+    title: 'Usuário',
+    url: '/users/info',
     icon: faUsersGear,
   },
   {
@@ -234,7 +257,7 @@ export default function MiniDrawer(content) {
             to='/settings'
             disablePadding
           >
-            <Avatar alt="User" src="" sx={{ width: 40, height: 40, marginLeft: 2 }} />
+            <Avatar alt="User" src={CaraTranquilo} sx={{ width: 55, height: 55, marginLeft: 2 }} />
           </NavLink>
         </Toolbar>
       </AppBar>
@@ -249,7 +272,7 @@ export default function MiniDrawer(content) {
         </StyledTypography>
         <StyledImg src={LogoSigres} alt="Logo Sigres" open={open} />
         <List>
-          {pages.filter((page) => (page.title !== "Chat")).map((page) => (
+          {pages.filter((page) => (!hiddenPages.includes(page.title))).map((page) => (
             <NavLink
               key={page.title}
               to={page.url}

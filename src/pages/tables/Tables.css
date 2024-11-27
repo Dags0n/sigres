@@ -1,0 +1,67 @@
+.table-list-container {
+    padding: 20px;
+}
+
+.table-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-list-header h1 {
+    font-size: 24px;
+    color: #333;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+    cursor: pointer;
+    font-weight: bold;
+    color: #333;
+    transition: all 0.3s;
+}
+
+.filter-button.active,
+.filter-button:hover {
+    background-color: #4caf50;
+    color: white;
+    border-color: #4caf50;
+}
+
+.table-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 10px;
+}
+
+.table-button {
+    padding: 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.table-button.available {
+    background-color: #4caf50;
+}
+
+.table-button.occupied {
+    background-color: #f44336;
+}
+
+.table-button:hover {
+    opacity: 0.9;
+}

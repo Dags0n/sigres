@@ -1,0 +1,15 @@
+th {
+    border: "1px solid #ccc";
+    padding: "10px";
+    background-color: "#f4f4f4";
+    text-align: "left";
+}
+
+td {
+    border: "1px solid #ccc";
+    padding: "10px";
+}
+
+tr {
+    background-color: "#fff";
+}

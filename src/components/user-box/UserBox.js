@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Avatar } from '@mui/material';
 import './UserBox.css'; // CSS opcional
+import { NavLink } from 'react-router-dom';
 
 const UserBox = ({ users }) => {
     return (
@@ -9,10 +10,16 @@ const UserBox = ({ users }) => {
             <div className="user-container">
                 {users.map((user, index) => (
                     <div key={index}>
-                        <div className="user-box">
-                            <Avatar alt="User" src="" sx={{ width: 80, height: 80 }} />
-                        </div>
-                        <h3>{user.name}</h3>
+                        <NavLink
+                            key='Usuário'
+                            to='/users/info'
+                            disablePadding
+                        >
+                            <div className="user-box">
+                                <Avatar alt="User" src="" sx={{ width: 80, height: 80 }} />
+                            </div>
+                        </NavLink>
+                            <h3>{user.name}</h3>
                     </div>
                 ))}
             </div>

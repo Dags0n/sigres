@@ -1,0 +1,78 @@
+.inventory-container {
+    padding: 20px;
+    max-width: 800px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  
+  .inventory-container h1 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .inventory-table th,
+  .inventory-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+  }
+  
+  .inventory-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+  
+  .status-badge.in-stock {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .status-badge.out-of-stock {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .action-button {
+    padding: 5px 10px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .add-button {
+    background-color: #28a745;
+    color: #fff;
+  }
+  
+  .add-button:hover {
+    background-color: #218838;
+  }
+  
+  .remove-button {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .remove-button:hover {
+    background-color: #c82333;
+  }
+  
+  .remove-button:disabled {
+    background-color: #f8d7da;
+    cursor: not-allowed;
+  }
+  
