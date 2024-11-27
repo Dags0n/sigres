@@ -13,6 +13,7 @@ import Tables from './pages/tables/Tables';
 import Orders from './pages/orders/Orders';
 import Settings from './pages/settings/Settings';
 import Reports from './pages/reports/Reports';
+import Stock from './pages/stock/Stock';
 
 const router = createBrowserRouter([
   {
@@ -60,7 +61,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/stock',
-    element: <Navbar ><h1>Estoque</h1></Navbar>,
+    element: 
+    <Navbar >
+      <Stock />
+    </Navbar>,
   },
   {
     path: '/orders',
