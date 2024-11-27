@@ -39,7 +39,7 @@ import { NavLink } from 'react-router-dom';
 
 const drawerWidth = 200;
 
-const hiddenPages = ['Chat', 'Adicionar Usuário', 'Usuário'];
+const hiddenPages = ['Chat', 'Adicionar Usuário', 'Usuário', 'Adicionar Produto', 'Produto'];
 
 const pages = [
   {
@@ -50,6 +50,16 @@ const pages = [
   {
     title: 'Produtos',
     url: '/products',
+    icon: faBasketShopping,
+  },
+  {
+    title: 'Adicionar Produto',
+    url: '/products/add',
+    icon: faBasketShopping,
+  },
+  {
+    title: 'Produto',
+    url: '/products/info',
     icon: faBasketShopping,
   },
   {

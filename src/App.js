@@ -6,6 +6,9 @@ import Users from './pages/users/Users';
 import AddUser from './pages/users/AddUser';
 import Login from './pages/login/Login';
 import InfoUser from './pages/users/InfoUser';
+import Products from './pages/products/Products';
+import AddProduct from './pages/products/AddProduct';
+import InfoProduct from './pages/products/InfoProduct';
 
 const router = createBrowserRouter([
   {
@@ -18,7 +21,24 @@ const router = createBrowserRouter([
   },
   {
     path: '/products',
-    element: <Navbar ><h1>Produtos</h1></Navbar>,
+    element: 
+    <Navbar >
+      <Products />
+    </Navbar>,
+  },
+  {
+    path: '/products/add',
+    element: 
+    <Navbar >
+      <AddProduct />
+    </Navbar>,
+  },
+  {
+    path: '/products/info',
+    element: 
+    <Navbar >
+      <InfoProduct />
+    </Navbar>,
   },
   {
     path: '/tables',
