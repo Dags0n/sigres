@@ -12,6 +12,7 @@ import InfoProduct from './pages/products/InfoProduct';
 import Tables from './pages/tables/Tables';
 import Orders from './pages/orders/Orders';
 import Settings from './pages/settings/Settings';
+import Reports from './pages/reports/Reports';
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,10 @@ const router = createBrowserRouter([
   },
   {
     path: '/reports',
-    element: <Navbar ><h1>Relatórios</h1></Navbar>,
+    element: 
+    <Navbar >
+      <Reports />
+    </Navbar>,
   },
   {
     path: '/stock',
@@ -60,7 +64,8 @@ const router = createBrowserRouter([
   },
   {
     path: '/orders',
-    element: <Navbar >
+    element: 
+    <Navbar >
       <Orders />
     </Navbar>,
   },
