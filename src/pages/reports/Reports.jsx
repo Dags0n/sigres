@@ -22,24 +22,6 @@ const Reports = () => {
             </Typography>
 
             <div className="relatorios-secao">
-                <h2>Estoque</h2>
-                <div className="relatorios-botoes">
-                    <button onClick={handleConfirm} className="relatorio-botao">
-                        📄 Relatório do Mês
-                    </button>
-                    <button onClick={handleConfirm} className="relatorio-botao">
-                        📄 Relatório da Semana
-                    </button>
-                    <button onClick={handleConfirm} className="relatorio-botao">
-                        📄 Relatório de Hoje
-                    </button>
-                    <button onClick={handleConfirm} className="relatorio-botao">
-                        📄 Relatório Personalizado
-                    </button>
-                </div>
-            </div>
-
-            <div className="relatorios-secao">
                 <h2>Pedidos</h2>
                 <div className="relatorios-botoes">
                     <button onClick={handleConfirm} className="relatorio-botao">
