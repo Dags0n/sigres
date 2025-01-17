@@ -64,7 +64,7 @@ const FormLogin = () => {
   return (
     <form method="post" action="/login" style={{ marginTop: 20 }}>
       <DivInput>
-        <FormTextField label="Email" type="email" />
+        <FormTextField label="Nome de Usuário" type="text" />
       </DivInput>
       <DivInput>
         <FormTextField label="Senha" type="password" />
