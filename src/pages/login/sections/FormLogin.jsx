@@ -1,10 +1,21 @@
 import { styled, Box, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from '../../../services/authService';
 
-function FormTextField({ label, type }) {
+function FormTextField({ label, type, value, onChange }) {
   return (
     <Box sx={{ width: { xs: '90%', md: '80%' }, marginBottom: 2 }}>
-      <StyledTextField fullWidth type={type} size='small' label={label} id={label} required />
+      <StyledTextField
+        fullWidth
+        type={type}
+        size='small'
+        label={label}
+        id={label}
+        required
+        value={value}
+        onChange={onChange}
+      />
     </Box>
   );
 }
@@ -29,7 +40,7 @@ const StyledButton = styled('button')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     width: '80%',
   },
-}))
+}));
 
 const StyledTextField = styled(TextField)({
   '& .MuiInputLabel-root': {
@@ -58,22 +69,49 @@ const DivInput = styled('div')({
   flexDirection: 'column',
   alignItems: 'center',
   width: '100%',
-})
+});
 
 const FormLogin = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError(''); // Limpa mensagens de erro anteriores
+    try {
+      await login(username, password); // Chama o serviço de login
+      navigate('/'); // Redireciona para a página inicial em caso de sucesso
+    } catch (err) {
+      setError('Credenciais inválidas, tente novamente.');
+    }
+  };
+
   return (
-    <form method="post" action="/login" style={{ marginTop: 20 }}>
+    <form onSubmit={handleLogin} style={{ marginTop: 20 }}>
       <DivInput>
-        <FormTextField label="Nome de Usuário" type="text" />
+        <FormTextField
+          label="Nome de Usuário"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </DivInput>
       <DivInput>
-        <FormTextField label="Senha" type="password" />
+        <FormTextField
+          label="Senha"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </DivInput>
+      {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
       <DivInput>
         <StyledButton type="submit">ENTRAR</StyledButton>
       </DivInput>
     </form>
-  )
-}
+  );
+};
 
-export default FormLogin
+export default FormLogin;

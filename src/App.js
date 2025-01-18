@@ -15,96 +15,126 @@ import Settings from './pages/settings/Settings';
 import Reports from './pages/reports/Reports';
 import Stock from './pages/stock/Stock';
 import Chat from './pages/chat/Chat';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: (
-      <Navbar>
-        <Home />
-      </Navbar>
+      <ProtectedRoute>
+        <Navbar>
+          <Home />
+        </Navbar>
+      </ProtectedRoute>
     ),
   },
   {
     path: '/products',
     element: 
-    <Navbar >
-      <Products />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <Products />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/products/add',
     element: 
-    <Navbar >
-      <AddProduct />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <AddProduct />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/products/info',
     element: 
-    <Navbar >
-      <InfoProduct />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <InfoProduct />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/tables',
     element: 
-    <Navbar >
-      <Tables />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <Tables />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/reports',
     element: 
-    <Navbar >
-      <Reports />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <Reports />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/stock',
     element: 
-    <Navbar >
-      <Stock />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <Stock />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/orders',
     element: 
-    <Navbar >
-      <Orders />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <Orders />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/users',
     element:
-      <Navbar>
-        <Users />
-      </Navbar>,
+      <ProtectedRoute>
+        <Navbar>
+          <Users />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/users/add',
     element:
-      <Navbar>
-        <AddUser />
-      </Navbar>,
+      <ProtectedRoute>
+        <Navbar>
+          <AddUser />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/users/info',
     element:
-      <Navbar>
-        <InfoUser />
-      </Navbar>,
+      <ProtectedRoute>
+        <Navbar>
+          <InfoUser />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/settings',
     element: 
-    <Navbar >
-      <Settings />
-    </Navbar>,
+      <ProtectedRoute>
+        <Navbar >
+          <Settings />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/chat',
-    element: <Navbar><Chat /></Navbar>,
+    element:
+      <ProtectedRoute>
+        <Navbar>
+          <Chat />
+        </Navbar>
+      </ProtectedRoute>
   },
   {
     path: '/login',
