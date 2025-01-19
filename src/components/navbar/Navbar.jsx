@@ -12,15 +12,13 @@ import {
   IconButton,
   ListItemButton,
   ListItemIcon,
-  ListItemText,
-  Avatar
+  ListItemText
 } from '@mui/material';
 import {
   Menu as MenuIcon,
 } from '@mui/icons-material';
 
 import LogoSigres from '../../assets/logo-sigres.png';
-import CaraTranquilo from '../../assets/cara-tranquilo.png';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons';
@@ -251,13 +249,6 @@ export default function MiniDrawer(content) {
           >
               <FontAwesomeIcon icon={faFacebookMessenger} color="white" style={{ height: 25 }} />
               <span style={{ fontSize: 'smaller', color: 'red', verticalAlign: '-2px' }}>2</span>
-          </NavLink>
-          <NavLink
-            key='Configurações'
-            to='/settings'
-            disablePadding
-          >
-            <Avatar alt="User" src={CaraTranquilo} sx={{ width: 55, height: 55, marginLeft: 2 }} />
           </NavLink>
         </Toolbar>
       </AppBar>

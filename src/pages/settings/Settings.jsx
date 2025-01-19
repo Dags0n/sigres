@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./Settings.css";
 import { Typography } from "@mui/material";
-import CaraTranquilo from '../../assets/cara-tranquilo.png';
 
 const Settings = () => {
     const [nomeEstabelecimento, setNomeEstabelecimento] = useState('');
@@ -141,16 +140,6 @@ const Settings = () => {
                             onChange={(e) => setBatePapoAtivo(e.target.checked)}
                             className="configuracoes-checkbox"
                         />
-                    </div>
-                    <div className="form-group avatar-section">
-                        <img
-                            src={CaraTranquilo}
-                            alt="Avatar"
-                            className="avatar-icon"
-                        />
-                        <button type="button" className="alterar-icone-button">
-                            Alterar Ícone
-                        </button>
                     </div>
                 </div>
                 <button id="configuracoes-button" className="configuracoes-button" onClick={handleConfirm}>Salvar Alterações</button>
