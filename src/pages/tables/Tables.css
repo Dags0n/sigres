@@ -39,8 +39,10 @@
 
 .table-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
     gap: 10px;
+    justify-items: start;
+        /* Centraliza os botões nas células */
 }
 
 .table-button {
@@ -52,6 +54,7 @@
     color: white;
     cursor: pointer;
     transition: all 0.3s;
+    width: 70px;
 }
 
 .table-button.available {

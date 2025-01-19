@@ -1,64 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import './Orders.css';
 import { Typography } from "@mui/material";
 
 const Orders = () => {
-    const pedidos = [
-        {
-            produto: "Heineken Lata",
-            preco: "R$4,99",
-            quantidade: "5 unidades",
-            total: "R$24,95",
-            mesa: "01",
-            horario: "23:59:01 23/10/2024",
-            adicionadoPor: "Administrador",
-        },
-        {
-            produto: "Skol Lata",
-            preco: "R$2,99",
-            quantidade: "3 unidades",
-            total: "R$8,97",
-            mesa: "02",
-            horario: "23:58:45 23/10/2024",
-            adicionadoPor: "Garçom 1",
-        },
-        {
-            produto: "Pipoca Bokus",
-            preco: "R$1,99",
-            quantidade: "10 unidades",
-            total: "R$19,99",
-            mesa: "01",
-            horario: "23:58:25 23/10/2024",
-            adicionadoPor: "Garçom 2",
-        },
-        {
-            produto: "Heineken Lata",
-            preco: "R$4,99",
-            quantidade: "5 unidades",
-            total: "R$24,95",
-            mesa: "01",
-            horario: "23:57:01 23/10/2024",
-            adicionadoPor: "Beltano",
-        },
-        {
-            produto: "Skol Lata",
-            preco: "R$2,99",
-            quantidade: "3 unidades",
-            total: "R$8,97",
-            mesa: "02",
-            horario: "23:51:45 23/10/2024",
-            adicionadoPor: "Sicrano",
-        },
-        {
-            produto: "Pipoca Bokus",
-            preco: "R$1,99",
-            quantidade: "10 unidades",
-            total: "R$19,99",
-            mesa: "01",
-            horario: "21:58:25 23/10/2024",
-            adicionadoPor: "Fulano, o retorno ",
-        },
-    ];
+    const [pedidos, setPedidos] = useState([]); // Estado para armazenar os pedidos
+    const [total, setTotal] = useState(0); // Estado para armazenar o total dos pedidos
+
+    // Carregar os pedidos ao montar o componente
+    useEffect(() => {
+        const fetchOrders = async () => {
+            try {
+                const token = localStorage.getItem('token'); // Obtenha o token JWT do localStorage
+                const response = await fetch('http://localhost:8080/order', {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Adiciona o token ao cabeçalho
+                        'Content-Type': 'application/json',
+                    }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    setPedidos(data); // Atualiza o estado com os pedidos recebidos
+                    calculateTotal(data); // Calcula o total dos pedidos
+                } else {
+                    console.error('Erro ao buscar pedidos');
+                }
+            } catch (error) {
+                console.error('Erro ao fazer a requisição', error);
+            }
+        };
+
+        fetchOrders();
+    }, []); // O array vazio garante que isso aconteça apenas uma vez ao montar
+
+    // Função para calcular o total de todos os pedidos
+    const calculateTotal = (pedidos) => {
+        const total = pedidos.reduce((acc, pedido) => {
+            if (pedido.product && pedido.amount) {
+                return acc + (pedido.product.price * pedido.amount);
+            }
+            return acc;
+        }, 0);
+        setTotal(total);
+    };
 
     return (
         <div style={{ padding: "20px" }}>
@@ -80,15 +64,22 @@ const Orders = () => {
                 <tbody>
                     {pedidos.map((pedido, index) => (
                         <tr key={index} style={styles.tr}>
-                            <td style={styles.td}>{pedido.produto}</td>
-                            <td style={styles.td}>{pedido.preco}</td>
-                            <td style={styles.td}>{pedido.quantidade}</td>
-                            <td style={styles.td}>{pedido.total}</td>
-                            <td style={styles.td}>{pedido.mesa}</td>
-                            <td style={styles.td}>{pedido.horario}</td>
-                            <td style={styles.td}>{pedido.adicionadoPor}</td>
+                            <td style={styles.td}>{pedido.product ? pedido.product.name : 'N/A'}</td>
+                            <td style={styles.td}>{pedido.product ? pedido.product.price : 'N/A'}</td>
+                            <td style={styles.td}>{pedido.amount} unidades</td>
+                            <td style={styles.td}>{pedido.product ? `R$${(pedido.product.price * pedido.amount).toFixed(2)}` : 'N/A'}</td>
+                            <td style={styles.td}>{pedido.desk ? pedido.desk.id : 'N/A'}</td>
+                            <td style={styles.td}>{pedido.time}</td>
+                            <td style={styles.td}>{pedido.createdBy ? pedido.createdBy.username : 'N/A'}</td>
                         </tr>
                     ))}
+                    {pedidos.length > 0 && (
+                        <tr style={styles.tr}>
+                            <td colSpan="3" style={styles.td}><strong>Total</strong></td>
+                            <td style={styles.td}><strong>R${total.toFixed(2)}</strong></td>
+                            <td colSpan="3" style={styles.td}></td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
         </div>

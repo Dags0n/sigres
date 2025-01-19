@@ -12,29 +12,33 @@ const Chat = () => {
     return localStorage.getItem('token'); // Recupera o token do localStorage
   };
 
-  // Função para obter todas as mensagens
-  const getMessages = async () => {
-    const token = getToken(); // Obtém o token
+  // Carregar mensagens ao montar o componente
+  useEffect(() => {
+    const getMessages = async () => {
+      const token = getToken(); // Obtém o token
 
-    try {
-      const response = await fetch('http://localhost:8080/chat', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`, // Adiciona o token no cabeçalho
-        },
-      });
+      try {
+        const response = await fetch('http://localhost:8080/chat', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`, // Adiciona o token no cabeçalho
+          },
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        setMessages(data);
-      } else {
-        console.error('Erro ao obter mensagens');
+        if (response.ok) {
+          const data = await response.json();
+          setMessages(data);
+        } else {
+          console.error('Erro ao obter mensagens');
+        }
+      } catch (error) {
+        console.error('Erro de conexão:', error);
       }
-    } catch (error) {
-      console.error('Erro de conexão:', error);
-    }
-  };
+    };
+
+    getMessages();
+  }, []); // Agora o useEffect tem o array vazio e só roda uma vez
 
   // Função para enviar uma nova mensagem
   const handleSendMessage = async (messageText) => {
@@ -67,11 +71,6 @@ const Chat = () => {
       }
     }
   };
-
-  // Carregar mensagens ao montar o componente
-  useEffect(() => {
-    getMessages();
-  }, []); // O array vazio garante que isso aconteça apenas uma vez ao montar
 
   return (
     <div className="chat-container">
