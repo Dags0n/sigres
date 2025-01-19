@@ -16,6 +16,7 @@ import Reports from './pages/reports/Reports';
 import Stock from './pages/stock/Stock';
 import Chat from './pages/chat/Chat';
 import ProtectedRoute from './components/ProtectedRoute';
+import Logout from './pages/logout/Logout';
 
 const router = createBrowserRouter([
   {
@@ -139,6 +140,10 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '/logout',
+    element: <Logout />,
   },
   {
     path: '*',

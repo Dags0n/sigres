@@ -31,6 +31,7 @@ import {
   faStore,
   faUsers,
   faUsersGear,
+  faRightFromBracket
 } from '@fortawesome/free-solid-svg-icons';
 import { faFileClipboard } from '@fortawesome/free-regular-svg-icons';
 import { NavLink } from 'react-router-dom';
@@ -111,6 +112,11 @@ const pages = [
     title: 'Chat',
     url: '/chat',
     icon: faFacebookMessenger,
+  },
+  {
+    title: 'Logout',
+    url: '/logout',
+    icon: faRightFromBracket,
   },
 ];
 

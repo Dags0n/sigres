@@ -21,12 +21,17 @@ export const login = async (username, password) => {
     }
 };
 
-// Logout e limpar o token
-export const logout = () => {
+// Logout, limpar o token e redirecionar para a página de login
+export const logout = (navigate) => {
     localStorage.removeItem('token');
     localStorage.removeItem('username');
     localStorage.removeItem('id');
     localStorage.removeItem('roles');
+
+    // Redireciona para a página de login
+    if (navigate) {
+        navigate('/login');
+    }
 };
 
 // Obter o token atual
