@@ -34,6 +34,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { faFileClipboard } from '@fortawesome/free-regular-svg-icons';
 import { NavLink } from 'react-router-dom';
+import { isUserAdmin } from '../../services/authService';
 
 const drawerWidth = 200;
 
@@ -54,11 +55,13 @@ const pages = [
     title: 'Adicionar Produto',
     url: '/products/add',
     icon: faBasketShopping,
+    isAdminOnly: true
   },
   {
     title: 'Produto',
     url: '/products/info',
     icon: faBasketShopping,
+    isAdminOnly: true
   },
   {
     title: 'Mesas',
@@ -84,21 +87,25 @@ const pages = [
     title: 'Usuários',
     url: '/users',
     icon: faUsersGear,
+    isAdminOnly: true
   },
   {
     title: 'Adicionar Usuário',
     url: '/users/add',
     icon: faUsersGear,
+    isAdminOnly: true
   },
   {
     title: 'Usuário',
     url: '/users/info',
     icon: faUsersGear,
+    isAdminOnly: true
   },
   {
     title: 'Configurações',
     url: '/settings',
     icon: faGear,
+    isAdminOnly: true
   },
   {
     title: 'Chat',
@@ -218,6 +225,8 @@ export default function MiniDrawer(content) {
     setOpen(false);
   };
 
+  const isAdmin = isUserAdmin();
+
   return (
     <Box sx={{ display: 'flex' }}>
       <AppBar position="fixed" open={open}>
@@ -262,7 +271,9 @@ export default function MiniDrawer(content) {
         </StyledTypography>
         <StyledImg src={LogoSigres} alt="Logo Sigres" open={open} />
         <List>
-          {pages.filter((page) => (!hiddenPages.includes(page.title))).map((page) => (
+          {pages.filter((page) => (!hiddenPages.includes(page.title))).map((page) => {
+            if (page.isAdminOnly && !isAdmin) return null;
+            return (
             <NavLink
               key={page.title}
               to={page.url}
@@ -287,7 +298,8 @@ export default function MiniDrawer(content) {
                 />
               </ListItemButton>
             </NavLink>
-          ))}
+            )
+          })}
         </List>
       </Drawer>
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>

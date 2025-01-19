@@ -13,7 +13,7 @@ export const login = async (username, password) => {
         localStorage.setItem('token', token); // Armazena o token
         localStorage.setItem('username', name); // Armazena o username
         localStorage.setItem('id', id); // Armazena o id
-        localStorage.setItem('roles', roles); // Armazena as roles
+        localStorage.setItem('roles', JSON.stringify(roles)); // Armazena as roles
         return token;
     } catch (error) {
         console.error('Erro no login:', error);
@@ -42,6 +42,12 @@ export const getUsername = () => {
 // Obter o id do user atual
 export const getUserId = () => {
     return localStorage.getItem('id') || "";
+};
+
+// Verifica se o usuário atual é admin
+export const isUserAdmin = () => {
+    const roles = localStorage.getItem('roles') || '[]';
+    return roles.includes('ROLE_ADMIN');
 };
 
 // Verificar se o usuário está autenticado
