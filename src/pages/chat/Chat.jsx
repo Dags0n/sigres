@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Para redirecionamento
 import ChatBox from '../../components/ChatBox';
 import MessageInput from '../../components/MessageInput';
 import { getUserId } from '../../services/authService';
@@ -6,6 +7,7 @@ import { getUserId } from '../../services/authService';
 const Chat = () => {
   const [messages, setMessages] = useState([]); // Estado para armazenar as mensagens
   const userId = getUserId();
+  const navigate = useNavigate(); // Hook para redirecionamento
 
   // Função para obter o token do localStorage
   const getToken = () => {
@@ -29,6 +31,9 @@ const Chat = () => {
         if (response.ok) {
           const data = await response.json();
           setMessages(data);
+        } else if (response.status === 405) {
+          console.warn('Chat está inativo. Redirecionando para a página inicial.');
+          navigate('/'); // Redireciona para a página inicial
         } else {
           console.error('Erro ao obter mensagens');
         }
@@ -38,7 +43,7 @@ const Chat = () => {
     };
 
     getMessages();
-  }, []); // Agora o useEffect tem o array vazio e só roda uma vez
+  }, [navigate]); // Inclui navigate como dependência
 
   // Função para enviar uma nova mensagem
   const handleSendMessage = async (messageText) => {
@@ -63,6 +68,9 @@ const Chat = () => {
         if (response.ok) {
           const data = await response.json();
           setMessages([...messages, data]); // Adiciona a mensagem ao estado
+        } else if (response.status === 405) {
+          console.warn('Chat está inativo. Redirecionando para a página inicial.');
+          navigate('/'); // Redireciona para a página inicial
         } else {
           console.error('Erro ao enviar mensagem');
         }
