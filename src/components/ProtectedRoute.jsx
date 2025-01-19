@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children }) => {
     if (!isAuthenticated()) {
         return <Navigate to="/login" />;
     }
-    const adminRoutes = ['/settings', '/products/add', '/products/info', '/users', '/users/info', '/users/add'];
+    const adminRoutes = ['/settings', '/products/add', '/products/info', '/users', '/users/info', '/users/add', '/reports'];
     if (adminRoutes.includes(window.location.pathname) && !isUserAdmin()) {
         return <Navigate to="/" />;
     }

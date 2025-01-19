@@ -73,6 +73,7 @@ const pages = [
     title: 'Relatórios',
     url: '/reports',
     icon: faFileClipboard,
+    isAdminOnly: true
   },
   {
     title: 'Estoque',

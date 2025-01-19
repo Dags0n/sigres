@@ -55,24 +55,27 @@ h2 {
     animation: fadeInOut 3s ease forwards;
 }
 
-/* Animação para a notificação */
-@keyframes fadeInOut {
-    0% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+.relatorios-container {
+    padding: 20px;
+}
 
-    10% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.relatorios-secao {
+    margin-bottom: 30px;
+}
 
-    90% {
-        opacity: 1;
-    }
+.relatorios-filtro {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
 
-    100% {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+input[type="date"] {
+    padding: 5px;
+    font-size: 14px;
+}
+button.relatorio-botao {
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
 }
