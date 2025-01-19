@@ -39,6 +39,9 @@ const Orders = () => {
             if (pedido.product && pedido.amount) {
                 return acc + (pedido.product.price * pedido.amount);
             }
+            if (pedido.productVariant && pedido.amount) {
+                return acc + (pedido.productVariant.price * pedido.amount);
+            }
             return acc;
         }, 0);
         setTotal(total);
@@ -64,10 +67,10 @@ const Orders = () => {
                 <tbody>
                     {pedidos.map((pedido, index) => (
                         <tr key={index} style={styles.tr}>
-                            <td style={styles.td}>{pedido.product ? pedido.product.name : 'N/A'}</td>
-                            <td style={styles.td}>{pedido.product ? pedido.product.price : 'N/A'}</td>
+                            <td style={styles.td}>{pedido.product ? pedido.product.name : (pedido.productVariant ? pedido.productVariant.name : 'N/A')}</td>
+                            <td style={styles.td}>{pedido.product ? pedido.product.price : (pedido.productVariant ? pedido.productVariant.price : 'N/A')}</td>
                             <td style={styles.td}>{pedido.amount} unidades</td>
-                            <td style={styles.td}>{pedido.product ? `R$${(pedido.product.price * pedido.amount).toFixed(2)}` : 'N/A'}</td>
+                            <td style={styles.td}>{pedido.product ? `R$${(pedido.product.price * pedido.amount).toFixed(2)}` : (pedido.productVariant ? `R$${(pedido.productVariant.price * pedido.amount).toFixed(2)}` : 'N/A')}</td>
                             <td style={styles.td}>{pedido.desk ? pedido.desk.id : 'N/A'}</td>
                             <td style={styles.td}>{pedido.time}</td>
                             <td style={styles.td}>{pedido.createdBy ? pedido.createdBy.username : 'N/A'}</td>
