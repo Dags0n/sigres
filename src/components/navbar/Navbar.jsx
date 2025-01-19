@@ -247,8 +247,7 @@ export default function MiniDrawer(content) {
             to='/chat'
             disablePadding
           >
-              <FontAwesomeIcon icon={faFacebookMessenger} color="white" style={{ height: 25 }} />
-              <span style={{ fontSize: 'smaller', color: 'red', verticalAlign: '-2px' }}>2</span>
+            <FontAwesomeIcon icon={faFacebookMessenger} color="white" style={{ height: 25 }} />
           </NavLink>
         </Toolbar>
       </AppBar>

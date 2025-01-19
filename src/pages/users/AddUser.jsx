@@ -1,67 +1,97 @@
 import React, { useState } from 'react';
 import './AddUser.css'; // Arquivo CSS para estilização
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const AddUser = () => {
     const [showNotification, setShowNotification] = useState(false);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [isAdmin, setIsAdmin] = useState(false);
+    const navigate = useNavigate();
 
-    const handleConfirm = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        setShowNotification(true);
 
-        document.getElementById("name").value = "";
-        document.getElementById("password").value = "";
-        document.getElementById("checkbox").checked = false;
+        // Criação do objeto com os dados do novo usuário
+        const newUser = {
+            username: username,
+            password: password,
+            roles: isAdmin ? ['ROLE_ADMIN', 'ROLE_USER'] : ['ROLE_USER'], // Atribui o papel de administrador ou usuário comum
+            userId: null
+        };
 
-        document.getElementById("confirm-button").style.backgroundColor = "#106212";
-        
-        // Ocultar a notificação automaticamente após 3 segundos
-        setTimeout(() => {
-            setShowNotification(false);
-        }, 3000);
-        setTimeout(() => {
-            document.getElementById("confirm-button").style.backgroundColor = "#4caf50";
-        }, 1000);
+        try {
+            const token = localStorage.getItem('token');
+            const response = await fetch('http://localhost:8080/user', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newUser),
+            });
+
+            if (response.ok) {
+                setShowNotification(true);
+                setUsername('');
+                setPassword('');
+                setIsAdmin(false);
+                setTimeout(() => {
+                    setShowNotification(false);
+                    navigate('/users'); // Redireciona para a lista de usuários
+                }, 3000);
+            } else {
+                alert('Erro ao cadastrar usuário');
+            }
+        } catch (error) {
+            console.error('Erro ao adicionar usuário', error);
+            alert('Erro ao adicionar usuário');
+        }
     };
 
     return (
         <div className="cadastro-usuario-container">
             <main className="main-content">
                 <section className="content">
-                    <form className="form-cadastro-usuario">
+                    <form className="form-cadastro-usuario" onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label>Nome do Usuário</label>
-                            <input id="name" type="text" placeholder="Digite o nome do usuário" />
+                            <input
+                                type="text"
+                                placeholder="Digite o nome do usuário"
+                                value={username}
+                                onChange={(e) => setUsername(e.target.value)}
+                                required
+                            />
                         </div>
                         <div className="form-group">
                             <label>Senha</label>
-                            <input id="password" type="password" placeholder="Digite a senha" />
+                            <input
+                                type="password"
+                                placeholder="Digite a senha"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                required
+                            />
                         </div>
                         <div className="form-group">
                             <label>Administrador</label>
-                            <input id="checkbox" type="checkbox" />
-                        </div>
-                        <div className="form-group avatar-section">
-                            <img
-                                src="https://via.placeholder.com/80"
-                                alt="Avatar"
-                                className="avatar-icon"
+                            <input
+                                type="checkbox"
+                                checked={isAdmin}
+                                onChange={(e) => setIsAdmin(e.target.checked)}
                             />
-                            <button type="button" className="alterar-icone-button">
-                                Alterar Ícone
-                            </button>
                         </div>
                         <div className="form-actions">
-                            <NavLink
-                                key='Usuários'
-                                to='/users'
-                                disablePadding
-                            >
+                            <NavLink key="Usuários" to="/users" disablePadding>
                                 <button type="button" className="cancel-button">
                                     Cancelar
                                 </button>
                             </NavLink>
-                            <button id="confirm-button" type="submit" className="confirm-button" onClick={handleConfirm}>
+                            <button
+                                type="submit"
+                                className="confirm-button"
+                            >
                                 Confirmar
                             </button>
                         </div>
