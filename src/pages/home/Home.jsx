@@ -12,7 +12,6 @@ export default function Home() {
   const [items, setItems] = React.useState({
     products: { name: 'Produtos Cadastrados', count: 0 },
     tables: { name: 'Mesas Cadastradas', count: 0 },
-    users: { name: 'Usuários Cadastrados', count: 0 },
     stock: { name: 'Produtos no Estoque', count: 0 },
     orders: { name: 'Pedidos Realizados', count: 0 },
   });
@@ -29,109 +28,48 @@ export default function Home() {
     });
   }
 
-  React.useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/product-variant', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
+  const fetchData = async (endpoint, itemId) => {
+    try {
+      const token = localStorage.getItem('token');
+      const response = await fetch(endpoint, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setItems((prevItems) => ({
+          ...prevItems,
+          [itemId]: {
+            ...prevItems[itemId],
+            count: itemId === 'stock' ? data.filter(item => item.amount > 0).length : data.length,
           },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setItems(
-            updateItemsCount('products', data.length),
-          );
-        } else {
-          console.error('Erro ao buscar itens');
-        }
-      } catch (error) {
-        console.error('Erro ao fazer a requisição', error);
+        }));
+      } else {
+        console.error('Erro ao buscar itens');
       }
+    } catch (error) {
+      console.error('Erro ao fazer a requisição', error);
     }
-    fetchItems();
-  }, []);
-
+  };
+  
   React.useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/desk', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setItems(
-            updateItemsCount('tables', data.length),
-          );
-        } else {
-          console.error('Erro ao buscar itens');
-        }
-      } catch (error) {
-        console.error('Erro ao fazer a requisição', error);
-      }
-    }
-    fetchItems();
+    fetchData('http://localhost:8080/product-variant', 'products');
   }, []);
   
   React.useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/user', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setItems(
-            updateItemsCount('users', data.length),
-          );
-        } else {
-          console.error('Erro ao buscar itens');
-        }
-      } catch (error) {
-        console.error('Erro ao fazer a requisição', error);
-      }
-    }
-    fetchItems();
+    fetchData('http://localhost:8080/desk', 'tables');
   }, []);
-
+  
   React.useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/order', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setItems(
-            updateItemsCount('orders', data.length),
-          );
-        } else {
-          console.error('Erro ao buscar itens');
-        }
-      } catch (error) {
-        console.error('Erro ao fazer a requisição', error);
-      }
-    }
-    fetchItems();
+    fetchData('http://localhost:8080/order', 'orders');
   }, []);
+  
+  React.useEffect(() => {
+    fetchData('http://localhost:8080/product-variant', 'stock');
+  }, []);  
 
   React.useEffect(() => {
     const fetchItems = async () => {
