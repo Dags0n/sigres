@@ -3,10 +3,7 @@ import { Typography } from '@mui/material';
 import ItemCounterBox from '../../components/item-counter-box/ItemCounterBox';
 import LineChart from '../../components/line-chart/LineChart';
 
-// Dados para o gráfico
-const xAxis = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'];
 const yAxis = 'Vendas Realizadas na semana';
-const data = [100, 20, 150, 25, 300, 35, 20];
 
 export default function Home() {
   const [items, setItems] = React.useState({
@@ -16,17 +13,71 @@ export default function Home() {
     orders: { name: 'Pedidos Realizados', count: 0 },
   });
 
-  const updateItemsCount = (itemId, count) => {
-    setItems((prevItems) => {
-      return {
-        ...prevItems,
-        [itemId]: {
-          ...prevItems[itemId],
-          count,
-        },
-      };
-    });
-  }
+  const [chartData, setChartData] = React.useState({
+    xAxis: [],
+    data: [],
+  });
+
+  const getWeekDateRange = () => {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+  
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() + diffToMonday);
+  
+    const endDate = new Date(today);
+    endDate.setDate(today.getDate() + diffToMonday + 6);
+  
+    const formatDate = (date) => date.toISOString().split('T')[0] + ' 00:00:00';
+    const formatEndDate = (date) => date.toISOString().split('T')[0] + ' 23:59:59';
+  
+    return {
+      initDate: formatDate(startDate),
+      finalDate: formatEndDate(endDate),
+    };
+  };
+
+  React.useEffect(() => {
+    const fetchSalesData = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        const { initDate, finalDate } = getWeekDateRange();
+        const response = await fetch('http://localhost:8080/report/extract', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            initDate: initDate,
+            finalDate: finalDate,
+          }),
+        });
+    
+        if (response.ok) {
+          const data = await response.json();          
+          const salesPerDay = [0, 0, 0, 0, 0, 0, 0];
+    
+          data.forEach(sale => {
+            const saleDate = new Date(sale.time.split(' ')[0].split('/').reverse().join('-') + ' ' + sale.time.split(' ')[1]);
+            const dayOfWeek = saleDate.getDay();
+            salesPerDay[dayOfWeek] += sale.amount;
+          });
+    
+          setChartData({
+            xAxis: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab', 'Dom'],
+            data: salesPerDay,
+          });
+        } else {
+          console.error('Erro ao buscar vendas');
+        }
+      } catch (error) {
+        console.error('Erro ao fazer a requisição', error);
+      }
+    };
+    fetchSalesData();
+  }, []);
 
   const fetchData = async (endpoint, itemId) => {
     try {
@@ -69,7 +120,7 @@ export default function Home() {
   
   React.useEffect(() => {
     fetchData('http://localhost:8080/product-variant', 'stock');
-  }, []);  
+  }, []);
 
   return (
     <>
@@ -84,7 +135,7 @@ export default function Home() {
           <Typography variant="h4" sx={{ fontFamily: 'Poppins', fontWeight: 900, m: "35px 0 10px 0" }}>
             Rendimentos
           </Typography>
-          <LineChart xAxis={xAxis} yAxis={yAxis} data={data} />
+          <LineChart xAxis={chartData.xAxis} yAxis={yAxis} data={chartData.data} />
         </div>
       </div>
     </>
