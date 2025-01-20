@@ -16,6 +16,7 @@ import Stock from './pages/stock/Stock';
 import Chat from './pages/chat/Chat';
 import ProtectedRoute from './components/ProtectedRoute';
 import Logout from './pages/logout/Logout';
+import AddVariant from './pages/products/AddVariant';
 
 const router = createBrowserRouter([
   {
@@ -43,6 +44,15 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Navbar >
           <AddProduct />
+        </Navbar>
+      </ProtectedRoute>
+  },
+  {
+    path: '/product-variant/add',
+    element:
+      <ProtectedRoute>
+        <Navbar >
+          <AddVariant />
         </Navbar>
       </ProtectedRoute>
   },

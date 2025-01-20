@@ -39,7 +39,7 @@ import { isUserAdmin } from '../../services/authService';
 
 const drawerWidth = 200;
 
-const hiddenPages = ['Chat', 'Adicionar Usuário', 'Usuário', 'Adicionar Produto'];
+const hiddenPages = ['Chat', 'Adicionar Usuário', 'Usuário', 'Adicionar Produto', 'Adicionar Variante'];
 
 const pages = [
   {
@@ -55,6 +55,12 @@ const pages = [
   {
     title: 'Adicionar Produto',
     url: '/products/add',
+    icon: faBasketShopping,
+    isAdminOnly: true
+  },
+  {
+    title: 'Adicionar Variante',
+    url: '/product-variant/add',
     icon: faBasketShopping,
     isAdminOnly: true
   },

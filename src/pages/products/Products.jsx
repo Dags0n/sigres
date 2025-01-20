@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './Products.css'; // Arquivo CSS para estilização
 import { Typography } from '@mui/material';
-import { NavLink } from 'react-router-dom';
+import { useNavigate, NavLink } from 'react-router-dom';
 import { isUserAdmin } from '../../services/authService';
 
 const Products = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const isAdmin = isUserAdmin();
+    const navigate = useNavigate();
 
     // Função para buscar os produtos e suas variantes da API
     const fetchProducts = async () => {
@@ -50,6 +51,11 @@ const Products = () => {
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    const handleEdit = async (productId) => {
+        localStorage.setItem("product-id", productId);
+        navigate("/product-variant/add");
+    };
 
     const handleProductDelete = async (productId) => {
         const confirmDelete = window.confirm('Tem certeza que deseja excluir este produto? Suas variantes também serão excluídas...');
@@ -162,6 +168,9 @@ const Products = () => {
                                 </td>
                                 {isAdmin ?
                                     <td>
+                                        <button className="action-button edit-button" onClick={() => handleEdit(product.id)}>
+                                            ➕
+                                        </button>
                                         <button className="action-button delete-button" onClick={() => handleProductDelete(product.id)}>
                                             🗑️
                                         </button>
