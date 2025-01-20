@@ -71,33 +71,6 @@ export default function Home() {
     fetchData('http://localhost:8080/product-variant', 'stock');
   }, []);  
 
-  React.useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8080/product-variant', {
-          method: 'GET',
-          headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          products = data.filter((item) => item.amount > 0);
-          setItems(
-            updateItemsCount('stock', products.length),
-          );
-        } else {
-          console.error('Erro ao buscar itens');
-        }
-      } catch (error) {
-        console.error('Erro ao fazer a requisição', error);
-      }
-    }
-    fetchItems();
-  }, []);
-
   return (
     <>
       <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'start', justifyContent: 'start', flexWrap: 'wrap' }}>
