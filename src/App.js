@@ -8,7 +8,6 @@ import Login from './pages/login/Login';
 import InfoUser from './pages/users/InfoUser';
 import Products from './pages/products/Products';
 import AddProduct from './pages/products/AddProduct';
-import InfoProduct from './pages/products/InfoProduct';
 import Tables from './pages/tables/Tables';
 import Orders from './pages/orders/Orders';
 import Settings from './pages/settings/Settings';
@@ -44,15 +43,6 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Navbar >
           <AddProduct />
-        </Navbar>
-      </ProtectedRoute>
-  },
-  {
-    path: '/products/info',
-    element: 
-      <ProtectedRoute>
-        <Navbar >
-          <InfoProduct />
         </Navbar>
       </ProtectedRoute>
   },
